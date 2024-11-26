@@ -50,7 +50,7 @@ async function getProduct(req, res, next) {
  * @param {object} req 
  * @param {object} res 
  */
-async function createProduct(req, res) {
+async function createProduct (req, res, ) {
   const product = await Products.create(req.body)
   res.json(product)
 }
@@ -61,27 +61,16 @@ async function editProduct (req, res, next) {
   res.json(product)
 }
 
-/**
- * Delete a product
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- */
 async function deleteProduct (req, res, next) {
   const response = await Products.destroy(req.params.id)
   res.json(response)
 }
+
 async function createOrder (req, res, next) {
   const order = await Orders.create(req.body)
-  res.json(orders)
+  res.json(order)
 }
 
-/**
- * List orders
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- */
 async function listOrders (req, res, next) {
   const { offset = 0, limit = 25, productId, status } = req.query
 

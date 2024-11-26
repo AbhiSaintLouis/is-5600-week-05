@@ -1,6 +1,7 @@
 const fs = require('fs').promises
 const path = require('path')
 const cuid = require('cuid')
+
 const db = require('./db')
 
 // Define our Product Model
@@ -56,15 +57,15 @@ async function list (options = {}) {
     
   return products
 }
+
 /**
  * Get a single product
  * @param {string} id
  * @returns {Promise<object>}
  */
-
-
-  // If no product is found, return null
-  return null;
+async function get(_id) {
+  const product = await Product.findById(_id)
+  return product
 }
 
 async function create (fields) {
@@ -78,22 +79,21 @@ async function edit (_id, change) {
   Object.keys(change).forEach(function (key) {
     product[key] = change[key]
   })
-  Object.assign(product, {...change} );
+  
+  //Object.assign(product, { ...change} );
+
   await product.save()
 
   return product
 }
-
-/**
- * Delete a product
- * @param {String} _id
- * @returns {Promise<Object>}
- */
 async function destroy (_id) {
   return await Product.deleteOne({_id})
 }
+
 module.exports = {
   list,
   get,
-  create
+  create,
+  edit,
+  destroy,
 }
